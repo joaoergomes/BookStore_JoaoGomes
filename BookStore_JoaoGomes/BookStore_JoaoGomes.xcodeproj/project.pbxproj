@@ -82,7 +82,6 @@
 				F685A95F811347DAAE97EF65 /* Pods-BookStore_JoaoGomes.debug.xcconfig */,
 				59D39B76E2C2304FD2883CC4 /* Pods-BookStore_JoaoGomes.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
