@@ -15,7 +15,7 @@ class NetworkManager
     {
         var components = URLComponents(url: baseUrl, resolvingAgainstBaseURL: false)!
         let queryItems = [URLQueryItem(name: "startIndex", value: String(index)), URLQueryItem(name:"maxResults", value: String(numResults))]
-        components.queryItems?.append(contentsOf: queryItems)
+        components.queryItems!.append(contentsOf: queryItems)
         self.loadRequest(urlRequest: URLRequest(url: components.url!), decodeWith: BookList.self, completion: completion)
     }
     
