@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class BookDetailViewController: UIViewController
 {
@@ -51,6 +52,19 @@ class BookDetailViewController: UIViewController
         if let description = book.volumeInfo.description
         {
             self.descriptionLabel.text = description
+        }
+        
+        if let imageUrl = URL(string: book.volumeInfo.imageLinks?.thumbnail?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
+        {
+            self.bookImageView.kf.setImage(with: imageUrl, placeholder: nil ){ result in
+                switch result
+                {
+                case .success(let result):
+                    print("photo success")
+                case .failure(let error):
+                    print("photo error: \(error.localizedDescription)")
+                }
+            }
         }
         
         self.purchaseButtonContainerView.isHidden = true
