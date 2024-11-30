@@ -11,6 +11,8 @@ import Kingfisher
 class BookCell: UICollectionViewCell
 {
     
+    @IBOutlet weak var favouriteButton: UIButton!
+    @IBOutlet weak var cellContainerView: UIView!
     @IBOutlet weak var infoContainerView: UIView!
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
@@ -23,18 +25,17 @@ class BookCell: UICollectionViewCell
         self.layer.shadowOpacity = 0.3
         self.layer.shadowRadius = 4
         self.clipsToBounds = false
-        self.layer.cornerRadius = 5
+        self.cellContainerView.clipsToBounds = true
+        self.cellContainerView.layer.cornerRadius = 5
+        
+        self.favouriteButton.layer.cornerRadius = self.favouriteButton.frame.height / 2
+        self.favouriteButton.layer.shadowColor = UIColor.black.cgColor
+        self.favouriteButton.layer.shadowOpacity = 0.3
+        self.favouriteButton.layer.shadowRadius = 4
         
         self.titleLabel.text = book.volumeInfo.title
         self.authorLabel.text = book.volumeInfo.authors?.first
         self.yearLabel.text = book.volumeInfo.publishedDate
-        
-        
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-        gradientLayer.locations = [0.0, 1.0]
-        gradientLayer.frame = infoContainerView.frame
-        self.infoContainerView.layer.insertSublayer(gradientLayer, at: 0)
         
         
         if let imageUrl = URL(string: book.volumeInfo.imageLinks?.thumbnail?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
