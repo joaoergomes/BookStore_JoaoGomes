@@ -1,7 +1,23 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-
+    "detail_description_header" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Description"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descrição"
+          }
+        }
+      }
+    }
   },
   "version" : "1.0"
 }
