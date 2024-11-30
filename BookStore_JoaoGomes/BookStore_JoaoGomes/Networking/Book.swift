@@ -18,7 +18,6 @@ struct Book: Codable
     let id: String
     let volumeInfo: VolumeInfo
     let saleInfo: SaleInfo
-    let imageLinks: ImageLinks?
 }
 
 struct VolumeInfo: Codable
@@ -29,6 +28,7 @@ struct VolumeInfo: Codable
     let publishedDate: String?
     let description: String?
     let pageCount: Int?
+    let imageLinks: ImageLinks?
 }
 
 struct SaleInfo: Codable
