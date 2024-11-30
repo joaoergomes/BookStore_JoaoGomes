@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ListViewController.swift
 //  BookStore_JoaoGomes
 //
 //  Created by João Gomes on 27/11/2024.
@@ -9,31 +9,25 @@ import UIKit
 
 class ListViewController: UIViewController
 {
+    var books: [Book] = []
+    {
+        didSet
+        {
+            self.collectionView.reloadData()
+        }
+    }
+    
     //MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
     
     //MARK: - Lifecycle
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         self.title = ""
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
-        self.collectionView.contentInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-        //self.collectionView.register(BookCell.self, forCellWithReuseIdentifier: "BookCell")
-        // Do any additional setup after loading the view.
-        
-        //        let manager = NetworkManager()
-        
-        //        manager.loadBookItems(index: 0, numResults: 20) { result in
-        //            switch result
-        //            {
-        //            case .success(let data):
-        //                print("success")
-        //            case .failure(let error):
-        //                print("error")
-        //            }
-        //        }
-        
+        performLoad()
     }
     
     override func viewWillLayoutSubviews()
@@ -42,32 +36,65 @@ class ListViewController: UIViewController
         self.collectionView.collectionViewLayout.invalidateLayout()
     }
     
+    private func performLoad()
+    {
+        let manager = NetworkManager()
+
+        manager.loadBookItems(index: books.count, numResults: 20) { [weak self] result in
+            DispatchQueue.main.async
+            {
+                switch result
+                {
+                case .success(let data):
+                    self?.books.append(contentsOf: data.items)
+                case .failure(let error):
+                    print("error")
+                }
+            }
+        }
+    }
+    
 }
 
 //MARK: - UICollectionViewDataSource
 extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource
 {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 17
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    {
+        return books.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+    {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookCell", for: indexPath) as! BookCell
-        cell.layer.shadowColor = UIColor.black.cgColor
-        cell.layer.shadowOpacity = 0.3
-        cell.layer.shadowRadius = 4
-        cell.clipsToBounds = false
-        cell.layer.cornerRadius = 5
-        print("IndexPath Section:\(indexPath.section)")
-        print("IndexPath Row:\(indexPath.row)")
-        print("IndexPath Item:\(indexPath.item)")
+        cell.configure(for: books[indexPath.row])
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if(indexPath.row == books.count - 3)
+        {
+            performLoad()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "BookDetailViewController") as? BookDetailViewController
+        {
+            vc.book = books[indexPath.row]
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
     }
 }
 
 extension ListViewController: UICollectionViewDelegateFlowLayout
 {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
+    {
+        self.collectionView.contentInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        
         let columns: CGFloat = 2
         let height: CGFloat = 300
         let interval:CGFloat = 16

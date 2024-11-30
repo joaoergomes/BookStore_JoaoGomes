@@ -23,16 +23,17 @@ struct Book: Codable
 
 struct VolumeInfo: Codable
 {
-    let title: String
-    let authors: [String]
-    let publisher: String
+    let title: String?
+    let authors: [String]?
+    let publisher: String?
+    let publishedDate: String?
     let description: String?
-    let pageCount: Int
+    let pageCount: Int?
 }
 
 struct SaleInfo: Codable
 {
-    let saleability: String
+    let saleability: String?
     let buyLink: String?
     let listPrice: ListPrice?
 }
