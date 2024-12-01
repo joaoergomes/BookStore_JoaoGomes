@@ -8,11 +8,12 @@
 import UIKit
 import Kingfisher
 
-class BookDetailViewController: UIViewController
+class BookDetailViewController: ViewController
 {
     //MARK: - Variables
     var book: Book!
     var thumbnailImage: UIImage?
+    var hasZoomed: Bool = false
     var isFavourite: Bool = false
     {
         didSet
@@ -22,6 +23,8 @@ class BookDetailViewController: UIViewController
     }
     
     //MARK: - IBOutlets
+    @IBOutlet weak var zoomHintText: UILabel!
+    @IBOutlet weak var zoomHintView: UIView!
     @IBOutlet weak var favouriteButton: FavouriteButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var authorsLabel: UILabel!
@@ -40,7 +43,13 @@ class BookDetailViewController: UIViewController
         self.imageScrollView.delegate = self
         
         self.isFavourite = CacheManager.shared.checkForBook(id: book.id)
-       
+        
+        self.titleLabel.font = UIFont(name: "Lato-Black", size: 32)
+        self.authorsLabel.font = UIFont(name: "Lato-Regular", size: 17)
+        self.descriptionHeaderLabel.font = UIFont(name: "Lato-Bold", size: 17)
+        self.yearLabel.font = UIFont(name: "Lato-Regular", size: 17)
+        self.descriptionLabel.font = UIFont(name: "Lato-Regular", size: 17)
+        self.zoomHintText.font = UIFont(name: "Lato-Bold", size: 24)
         if let title = book.volumeInfo.title
         {
             self.title = title
@@ -49,11 +58,21 @@ class BookDetailViewController: UIViewController
         
         if let authors = book.volumeInfo.authors
         {
-            self.authorsLabel.text = ""
+            var authorText = ""
             for author in authors
             {
-                self.authorsLabel.text?.append(author)
+                authorText.append(", \(author)")
             }
+            
+            if let index = authorText.firstIndex(of: ",")
+            {
+                authorText.remove(at: index)
+            }
+            if let index = authorText.firstIndex(of: " ")
+            {
+                authorText.remove(at: index)
+            }
+            self.authorsLabel.text = authorText
         }
         
         if let year = book.volumeInfo.publishedDate
@@ -67,7 +86,7 @@ class BookDetailViewController: UIViewController
         }
         
         self.purchaseButtonContainerView.isHidden = true
-        if let purchaseUrl = book.saleInfo.buyLink
+        if let _ = book.saleInfo.buyLink
         {
             self.purchaseButtonContainerView.isHidden = false
         }
@@ -85,8 +104,8 @@ class BookDetailViewController: UIViewController
                 self.bookImageView.kf.setImage(with: imageUrl, placeholder: nil ){ result in
                     switch result
                     {
-                    case .success(let result):
-                        print("photo success")
+                    case .success(_):
+                        print("Photo Loaded")
                     case .failure(let error):
                         print("photo error: \(error.localizedDescription)")
                     }
@@ -132,5 +151,15 @@ extension BookDetailViewController: UIScrollViewDelegate
 {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return bookImageView
+    }
+    
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        if !hasZoomed
+        {
+            UIView.animate(withDuration: 0.5) {
+                self.zoomHintView.alpha = 0
+            }
+        }
+        
     }
 }

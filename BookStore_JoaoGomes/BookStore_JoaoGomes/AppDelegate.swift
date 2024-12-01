@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         let storyboard = UIStoryboard(name: "Main", bundle: nil) // type storyboard name instead of Main
         if let viewController = storyboard.instantiateViewController(withIdentifier: "ListViewController") as? ListViewController
         {
-            window?.rootViewController = UINavigationController(rootViewController: viewController)
+            window?.rootViewController = NavigationController(rootViewController: viewController)
         }
         
         

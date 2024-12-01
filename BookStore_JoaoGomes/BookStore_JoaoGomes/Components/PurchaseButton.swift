@@ -18,22 +18,31 @@ class PurchaseButton: UIButton
         }
     }
     
-    override init(frame: CGRect) {
+    override init(frame: CGRect)
+    {
         super.init(frame: frame)
         commonInit()
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder)
+    {
         super.init(coder: aDecoder)
         commonInit()
     }
     
-    override func prepareForInterfaceBuilder() {
+    override func prepareForInterfaceBuilder()
+    {
+        commonInit()
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
         commonInit()
     }
 
     private func commonInit() {
         self.clipsToBounds = true
         self.layer.cornerRadius = self.cornerRadius
+        self.titleLabel?.font = UIFont(name: "Lato-Bold", size: 18)
     }
 }

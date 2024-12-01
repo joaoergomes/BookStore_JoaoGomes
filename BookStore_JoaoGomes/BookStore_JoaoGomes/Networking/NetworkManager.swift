@@ -35,6 +35,7 @@ class NetworkManager
                 {
                     let list = try decoder.decode(decodeType.self, from: data)
                     print(String(data: data, encoding: .utf8)!)
+                    completion(.success(list))
                 }
                 catch
                 {

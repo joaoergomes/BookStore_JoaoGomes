@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ListViewController: UIViewController
+class ListViewController: ViewController
 {
     var books: [Book] = []
     {
@@ -25,13 +25,22 @@ class ListViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.title = ""
+        let titleView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 44))
+        let logo = UIImage(named: "SplashLogo2")
+        let imageView = UIImageView(image:logo)
+        imageView.contentMode = .scaleAspectFit
+        imageView.frame = titleView.bounds
+        titleView.addSubview(imageView)
+        self.navigationItem.titleView = titleView
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
+
         
         //Favourites List
         let favouriteButtonItem = UIBarButtonItem(image: UIImage(named: "archive"), style: .plain, target: self, action: #selector(goToFavourites))
         self.navigationItem.rightBarButtonItem = favouriteButtonItem
+        
+       
         
         performLoad()
     }
@@ -65,6 +74,7 @@ class ListViewController: UIViewController
                     self?.activityIndicatorView.stopAnimating()
                     self?.books.append(contentsOf: data.items)
                 case .failure(let error):
+                    self?.presentAlert(with: "alert_error_title".i18n ?? "", message: "alert_error_message".i18n ?? "")
                     print("error: \(error.localizedDescription)")
                 }
             }

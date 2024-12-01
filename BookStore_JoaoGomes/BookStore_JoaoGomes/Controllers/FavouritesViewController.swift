@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FavouritesViewController: UIViewController
+class FavouritesViewController: ViewController
 {
     
     //MARK: - Variables
@@ -38,6 +38,7 @@ class FavouritesViewController: UIViewController
         self.activityIndicatorView.isHidden = true
         
         self.emptyListLabel.isHidden = true
+        self.emptyListLabel.font = UIFont(name: "Lato-Bold", size: 17)
         
         performLoad()
     }
