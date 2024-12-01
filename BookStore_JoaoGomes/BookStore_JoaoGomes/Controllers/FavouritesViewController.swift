@@ -1,37 +1,43 @@
 //
-//  ListViewController.swift
+//  FavouritesViewController.swift
 //  BookStore_JoaoGomes
 //
-//  Created by João Gomes on 27/11/2024.
+//  Created by João Gomes on 01/12/2024.
 //
 
 import UIKit
 
-class ListViewController: UIViewController
+class FavouritesViewController: UIViewController
 {
-    var books: [Book] = []
+    
+    //MARK: - Variables
+    var books: [BookWithThumbnailData] = []
     {
         didSet
         {
+            self.emptyListLabel.isHidden = !books.isEmpty
             self.collectionView.reloadData()
         }
     }
     
+    private var isReturningFromDetailScreen: Bool = false
+    
     //MARK: - IBOutlets
+    @IBOutlet weak var emptyListLabel: LocalizedLabel!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var collectionView: UICollectionView!
     
     //MARK: - Lifecycle
     override func viewDidLoad()
     {
+
         super.viewDidLoad()
-        self.title = ""
+        self.title = "favourites_screen_title".i18n
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
+        self.activityIndicatorView.isHidden = true
         
-        //Favourites List
-        let favouriteButtonItem = UIBarButtonItem(image: UIImage(named: "archive"), style: .plain, target: self, action: #selector(goToFavourites))
-        self.navigationItem.rightBarButtonItem = favouriteButtonItem
+        self.emptyListLabel.isHidden = true
         
         performLoad()
     }
@@ -39,12 +45,12 @@ class ListViewController: UIViewController
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-        
-        if !books.isEmpty
+        if self.isReturningFromDetailScreen
         {
-            self.collectionView.reloadData()
+            performLoad()
+            self.isReturningFromDetailScreen = false
         }
-           
+        
     }
     
     override func viewWillLayoutSubviews()
@@ -55,37 +61,13 @@ class ListViewController: UIViewController
     
     private func performLoad()
     {
-        let manager = NetworkManager()
-
-        self.activityIndicatorView.startAnimating()
-        manager.loadBookItems(index: books.count, numResults: 20) { [weak self] result in
-            DispatchQueue.main.async
-            {
-                switch result
-                {
-                case .success(let data):
-                    self?.activityIndicatorView.stopAnimating()
-                    self?.books.append(contentsOf: data.items)
-                case .failure(let error):
-                    print("error: \(error.localizedDescription)")
-                }
-            }
-        }
-    }
-    
-    @objc func goToFavourites()
-    {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "FavouritesViewController") as? FavouritesViewController
-        {
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
+        self.books = CacheManager.shared.getAllBooks()
     }
     
 }
 
 //MARK: - UICollectionViewDataSource
-extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource
+extension FavouritesViewController: UICollectionViewDelegate, UICollectionViewDataSource
 {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
@@ -95,25 +77,23 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookCell", for: indexPath) as! BookCell
-        cell.isFavourite = CacheManager.shared.checkForBook(id: books[indexPath.row].id)
+        cell.isFavourite = true
         cell.configure(for: books[indexPath.row])
         cell.favouriteAction = {book in CacheManager.shared.addBook(book.book, thumbnail: book.thumbnailBase64?.imageFromBase64)}
-        cell.unfavouriteAction = {book in CacheManager.shared.removeBook(id: book.id)}
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if(indexPath.row == books.count - 4)
-        {
-            performLoad()
+        cell.unfavouriteAction = {[weak self] book in
+            CacheManager.shared.removeBook(id: book.id)
+            self?.performLoad()
         }
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "BookDetailViewController") as? BookDetailViewController
         {
-            vc.book = books[indexPath.row]
+            vc.book = books[indexPath.row].book
+            vc.thumbnailImage = books[indexPath.row].thumbnailBase64?.imageFromBase64
+            self.isReturningFromDetailScreen = true
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
@@ -121,7 +101,7 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
 }
 
-extension ListViewController: UICollectionViewDelegateFlowLayout
+extension FavouritesViewController: UICollectionViewDelegateFlowLayout
 {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
@@ -135,4 +115,5 @@ extension ListViewController: UICollectionViewDelegateFlowLayout
         return CGSize(width: (collectionView.frame.width - intervalSum - 16)/columns, height: height)
     }
 }
+
 

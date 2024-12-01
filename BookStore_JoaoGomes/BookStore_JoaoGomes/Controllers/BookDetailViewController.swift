@@ -12,8 +12,17 @@ class BookDetailViewController: UIViewController
 {
     //MARK: - Variables
     var book: Book!
+    var thumbnailImage: UIImage?
+    var isFavourite: Bool = false
+    {
+        didSet
+        {
+            self.favouriteButton.isFavourited = self.isFavourite
+        }
+    }
     
     //MARK: - IBOutlets
+    @IBOutlet weak var favouriteButton: FavouriteButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var authorsLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
@@ -29,6 +38,9 @@ class BookDetailViewController: UIViewController
     {
         super.viewDidLoad()
         self.imageScrollView.delegate = self
+        
+        self.isFavourite = CacheManager.shared.checkForBook(id: book.id)
+       
         if let title = book.volumeInfo.title
         {
             self.title = title
@@ -54,23 +66,32 @@ class BookDetailViewController: UIViewController
             self.descriptionLabel.text = description
         }
         
-        if let imageUrl = URL(string: book.volumeInfo.imageLinks?.thumbnail?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
-        {
-            self.bookImageView.kf.setImage(with: imageUrl, placeholder: nil ){ result in
-                switch result
-                {
-                case .success(let result):
-                    print("photo success")
-                case .failure(let error):
-                    print("photo error: \(error.localizedDescription)")
-                }
-            }
-        }
-        
         self.purchaseButtonContainerView.isHidden = true
         if let purchaseUrl = book.saleInfo.buyLink
         {
             self.purchaseButtonContainerView.isHidden = false
+        }
+        
+        //Get image from cache if accessed from favourites
+        if let thumbnail = self.thumbnailImage
+        {
+            self.bookImageView.image = thumbnail
+        }
+        else
+        {
+            //Get image from Kingfisher
+            if let imageUrl = URL(string: book.volumeInfo.imageLinks?.thumbnail?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
+            {
+                self.bookImageView.kf.setImage(with: imageUrl, placeholder: nil ){ result in
+                    switch result
+                    {
+                    case .success(let result):
+                        print("photo success")
+                    case .failure(let error):
+                        print("photo error: \(error.localizedDescription)")
+                    }
+                }
+            }
         }
 
     }
@@ -85,9 +106,28 @@ class BookDetailViewController: UIViewController
         }
     }
     
+    @IBAction func favouriteButtonPressed(_ sender: Any)
+    {
+        self.favouriteButton.isFavourited = !self.favouriteButton.isFavourited
+        guard let book = self.book else
+        {
+            return
+        }
+        
+        self.isFavourite = !self.isFavourite
+        
+        if isFavourite
+        {
+            CacheManager.shared.addBook(book, thumbnail: self.bookImageView.image)
+        }
+        else
+        {
+            CacheManager.shared.removeBook(id: book.id)
+        }
+    }
 }
 
-
+//MARK: - ScrollView Delegate
 extension BookDetailViewController: UIScrollViewDelegate
 {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
