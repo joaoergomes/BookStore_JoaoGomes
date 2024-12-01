@@ -30,13 +30,11 @@ class NetworkManager
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let data = data
             {
-                print("Data retrieved")
                 let decoder = JSONDecoder()
                 do
                 {
                     let list = try decoder.decode(decodeType.self, from: data)
-                    completion(.success(list))
-                    print("Success")
+                    print(String(data: data, encoding: .utf8)!)
                 }
                 catch
                 {
