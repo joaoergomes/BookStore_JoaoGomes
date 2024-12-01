@@ -38,11 +38,15 @@ class PurchaseButton: UIButton
     override func awakeFromNib() {
         super.awakeFromNib()
         commonInit()
+        self.titleLabel?.text = "detail_purchase_button".i18n
+        self.titleLabel?.font = UIFont(name: "Lato-Bold", size: 18)
     }
 
     private func commonInit() {
         self.clipsToBounds = true
         self.layer.cornerRadius = self.cornerRadius
+        self.setTitle("detail_purchase_button".i18n, for: .normal)
+        self.titleLabel?.text = "detail_purchase_button".i18n
         self.titleLabel?.font = UIFont(name: "Lato-Bold", size: 18)
     }
 }
