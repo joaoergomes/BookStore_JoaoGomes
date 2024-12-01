@@ -9,8 +9,14 @@ import Foundation
 
 class NetworkManager
 {
+    //MARK: - Variables
+    static let shared = NetworkManager()
     private let baseUrl = URL(string:"https://www.googleapis.com/books/v1/volumes?q=ios")!
     
+    //MARK: - Inits
+    private init(){}
+    
+    //MARK: - Functions
     func loadBookItems(index: Int, numResults: Int, completion: @escaping (Result<BookList,Error>) -> Void)
     {
         var components = URLComponents(url: baseUrl, resolvingAgainstBaseURL: false)!
@@ -24,13 +30,11 @@ class NetworkManager
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let data = data
             {
-                print("Data retrieved")
                 let decoder = JSONDecoder()
                 do
                 {
                     let list = try decoder.decode(decodeType.self, from: data)
-                    completion(.success(list))
-                    print("Success")
+                    print(String(data: data, encoding: .utf8)!)
                 }
                 catch
                 {
