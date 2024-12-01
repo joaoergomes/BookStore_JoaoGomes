@@ -15,7 +15,7 @@ import UIKit
         {
             if let localizedText = localizedText
             {
-                self.text = NSLocalizedString(localizedText, comment: "")
+                self.text = localizedText.i18n
             }
             
         }

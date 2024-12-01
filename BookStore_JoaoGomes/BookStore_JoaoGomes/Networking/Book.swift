@@ -49,3 +49,9 @@ struct ImageLinks: Codable
     let smallThumbnail: String?
     let thumbnail: String?
 }
+
+struct BookWithThumbnailData: Codable
+{
+    let book: Book
+    let thumbnailBase64: String?
+}
