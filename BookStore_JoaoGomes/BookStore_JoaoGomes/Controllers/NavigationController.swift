@@ -18,10 +18,10 @@ class NavigationController: UINavigationController
     private func customizeNavigationBar()
     {
         //Tint Color
-        self.navigationBar.tintColor = .black
+        self.navigationBar.tintColor = .mainText
         
         let attrs = [
-            NSAttributedString.Key.foregroundColor: UIColor.black,
+            NSAttributedString.Key.foregroundColor: UIColor.mainText,
             NSAttributedString.Key.font: UIFont(name: "Lato-Bold", size: 17)!
         ]
         UINavigationBar.appearance().titleTextAttributes = attrs

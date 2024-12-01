@@ -62,14 +62,11 @@ class CacheManager: NSObject
             do
             {
                 storedBooksArray = try decoder.decode([BookWithThumbnailData].self, from: storedBooks)
-                //completion(.success(list))
-                print("Success decoding cache")
             }
             catch
             {
                 print("Decoding error: \(error)")
                 return []
-                //completion(.failure(error))
             }
         }
         return storedBooksArray
@@ -84,14 +81,11 @@ class CacheManager: NSObject
             let data = try encoder.encode(array)
             print(String(data: data, encoding: .utf8)!)
             userDefaults!.set(data, forKey: "storedBooks")
-            //completion(.success(list))
-            print("Success")
         }
         catch
         {
             print("Decoding error: \(error)")
             return
-            //completion(.failure(error))
         }
     }
     

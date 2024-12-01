@@ -15,12 +15,12 @@ class FavouriteButton: UIButton
             if isFavourited
             {
                 self.setImage(UIImage(named:"favorite_fill"), for: .normal)
-                self.tintColor = .red
+                self.tintColor = .favourite
             }
             else
             {
                 self.setImage(UIImage(named: "favorite_outline"), for: .normal)
-                self.tintColor = .black
+                self.tintColor = .mainText
             }
             
         }
@@ -46,7 +46,7 @@ class FavouriteButton: UIButton
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOpacity = 0.3
         self.layer.shadowRadius = 4
-        self.backgroundColor = .white
+        self.backgroundColor = .statusBars
         self.layer.cornerRadius = self.frame.height / 2
     }
     

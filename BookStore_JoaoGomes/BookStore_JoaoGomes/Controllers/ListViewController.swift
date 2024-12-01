@@ -16,6 +16,7 @@ class ListViewController: ViewController
             self.collectionView.reloadData()
         }
     }
+    var refreshControl: UIRefreshControl!
     
     //MARK: - IBOutlets
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
@@ -34,6 +35,11 @@ class ListViewController: ViewController
         self.navigationItem.titleView = titleView
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
+        
+        self.refreshControl = UIRefreshControl()
+        self.collectionView.alwaysBounceVertical = true
+        self.refreshControl.addTarget(self, action: #selector(refreshList), for: .valueChanged)
+        self.collectionView.refreshControl = self.refreshControl
 
         
         //Favourites List
@@ -65,6 +71,7 @@ class ListViewController: ViewController
     private func performLoad()
     {
         self.activityIndicatorView.startAnimating()
+        self.collectionView.refreshControl?.beginRefreshing()
         NetworkManager.shared.loadBookItems(index: books.count, numResults: 20) { [weak self] result in
             DispatchQueue.main.async
             {
@@ -72,6 +79,8 @@ class ListViewController: ViewController
                 {
                 case .success(let data):
                     self?.activityIndicatorView.stopAnimating()
+                    self?.activityIndicatorView.alpha = 0
+                    self?.collectionView.refreshControl?.endRefreshing()
                     self?.books.append(contentsOf: data.items)
                 case .failure(let error):
                     self?.presentAlert(with: "alert_error_title".i18n ?? "", message: "alert_error_message".i18n ?? "")
@@ -79,6 +88,12 @@ class ListViewController: ViewController
                 }
             }
         }
+    }
+    
+    @objc func refreshList()
+    {
+        self.books = []
+        performLoad()
     }
     
     @objc func goToFavourites()

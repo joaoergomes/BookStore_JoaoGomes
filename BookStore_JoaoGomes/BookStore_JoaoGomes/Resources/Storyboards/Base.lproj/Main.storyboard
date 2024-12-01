@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <device id="retina6_12" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -20,7 +21,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8J3-aC-Yzm">
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
-                                <color key="backgroundColor" systemColor="systemGray3Color"/>
+                                <color key="backgroundColor" name="Background"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yob-tu-yfT">
                                     <size key="itemSize" width="201" height="343"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -100,7 +101,7 @@
                                                         </view>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5R7-h6-BuQ" customClass="FavouriteButton" customModule="BookStore_JoaoGomes" customModuleProvider="target">
                                                             <rect key="frame" x="146.33333333333334" y="4" width="50.666666666666657" height="50.666666666666664"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="backgroundColor" name="StatusBars"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="5R7-h6-BuQ" secondAttribute="height" multiplier="1:1" id="bGl-BX-kGW"/>
                                                             </constraints>
@@ -154,11 +155,11 @@
                                     <constraint firstAttribute="width" secondItem="enW-0E-BhA" secondAttribute="height" multiplier="1:1" id="0F0-1K-k85"/>
                                     <constraint firstAttribute="height" constant="40" id="HgS-aL-xAb"/>
                                 </constraints>
-                                <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="color" name="MainText"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="StatusBars"/>
                         <constraints>
                             <constraint firstItem="8J3-aC-Yzm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="FOh-l4-pky"/>
                             <constraint firstItem="enW-0E-BhA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LrE-5h-IRh"/>
@@ -245,7 +246,7 @@
                                                                                     </view>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vrU-qi-aT4" customClass="FavouriteButton" customModule="BookStore_JoaoGomes" customModuleProvider="target">
                                                                                         <rect key="frame" x="334.33333333333331" y="7.9999999999999964" width="50.666666666666686" height="50.666666666666657"/>
-                                                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                        <color key="backgroundColor" name="StatusBars"/>
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="width" secondItem="vrU-qi-aT4" secondAttribute="height" multiplier="1:1" id="AMn-id-10C"/>
                                                                                             <constraint firstAttribute="width" secondItem="vrU-qi-aT4" secondAttribute="height" multiplier="1:1" id="LT9-Vx-bgw"/>
@@ -278,7 +279,7 @@
                                                                                 <viewLayoutGuide key="frameLayoutGuide" id="lAr-tj-oLI"/>
                                                                             </scrollView>
                                                                         </subviews>
-                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="trailing" secondItem="jMr-Nl-Rqj" secondAttribute="trailing" id="D31-Tw-iBv"/>
                                                                             <constraint firstItem="jMr-Nl-Rqj" firstAttribute="top" secondItem="cuv-nx-P49" secondAttribute="top" id="X5v-yC-RyS"/>
@@ -299,25 +300,25 @@
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rdh-ey-Nm7">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="361" height="38.333333333333336"/>
                                                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
-                                                                                        <nil key="textColor"/>
+                                                                                        <color key="textColor" name="MainText"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authors" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WPo-NH-Ntg">
                                                                                         <rect key="frame" x="0.0" y="38.333333333333371" width="361" height="20.333333333333329"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                        <nil key="textColor"/>
+                                                                                        <color key="textColor" name="MainText"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Knz-Hm-pj3">
                                                                                         <rect key="frame" x="0.0" y="58.666666666666636" width="361" height="20.333333333333336"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                        <nil key="textColor"/>
+                                                                                        <color key="textColor" name="MainText"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                 </subviews>
                                                                             </stackView>
                                                                         </subviews>
-                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="qSu-6R-UX9" secondAttribute="bottom" constant="8" id="99u-1d-eOr"/>
                                                                             <constraint firstAttribute="trailing" secondItem="qSu-6R-UX9" secondAttribute="trailing" constant="16" id="SiR-Gp-PRh"/>
@@ -327,6 +328,7 @@
                                                                         </constraints>
                                                                     </view>
                                                                 </subviews>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <variation key="heightClass=regular-widthClass=compact" axis="vertical" distribution="fill"/>
                                                             </stackView>
                                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w2z-c0-zFM">
@@ -338,7 +340,7 @@
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Frp-ls-4kR" customClass="LocalizedLabel" customModule="BookStore_JoaoGomes" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="361" height="20.333333333333332"/>
                                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                                                <nil key="textColor"/>
+                                                                                <color key="textColor" name="MainText"/>
                                                                                 <nil key="highlightedColor"/>
                                                                                 <userDefinedRuntimeAttributes>
                                                                                     <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="detail_description_header"/>
@@ -347,13 +349,13 @@
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3i-cO-xly">
                                                                                 <rect key="frame" x="0.0" y="28.333333333333371" width="361" height="140.33333333333334"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                <nil key="textColor"/>
+                                                                                <color key="textColor" name="MainText"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                         </subviews>
                                                                     </stackView>
                                                                 </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstItem="iKv-9w-hnB" firstAttribute="leading" secondItem="w2z-c0-zFM" secondAttribute="leading" constant="16" id="DeN-ss-osM"/>
                                                                     <constraint firstAttribute="trailing" secondItem="iKv-9w-hnB" secondAttribute="trailing" constant="16" id="JKe-Go-E65"/>
@@ -362,9 +364,10 @@
                                                                 </constraints>
                                                             </view>
                                                         </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </stackView>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" name="Background"/>
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="nTl-lI-Kun" secondAttribute="bottom" id="9LE-8a-TrG"/>
                                                     <constraint firstItem="nTl-lI-Kun" firstAttribute="top" secondItem="Luk-9h-xFe" secondAttribute="top" id="ZRJ-za-KJ6"/>
@@ -395,7 +398,7 @@
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ol-7z-Cds" customClass="PurchaseButton" customModule="BookStore_JoaoGomes" customModuleProvider="target">
                                                 <rect key="frame" x="16" y="8" width="361" height="44"/>
-                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                                <color key="backgroundColor" name="PurchaseButton"/>
                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="cart" catalog="system" title="Purchase" imagePadding="8">
@@ -411,7 +414,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" name="Background"/>
                                         <constraints>
                                             <constraint firstItem="kZA-XT-tHT" firstAttribute="top" secondItem="qUD-wg-HaJ" secondAttribute="top" id="2fi-pu-IBd"/>
                                             <constraint firstItem="kZA-XT-tHT" firstAttribute="leading" secondItem="qUD-wg-HaJ" secondAttribute="leading" id="FfC-Ci-ZdR"/>
@@ -424,13 +427,14 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" name="Background"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="759" id="i0R-QU-1zM"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3Ed-eF-666"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="StatusBars"/>
                         <constraints>
                             <constraint firstItem="6PG-Z4-tKk" firstAttribute="leading" secondItem="3Ed-eF-666" secondAttribute="leading" id="7zE-VA-LWJ"/>
                             <constraint firstItem="3Ed-eF-666" firstAttribute="bottom" secondItem="6PG-Z4-tKk" secondAttribute="bottom" id="aqc-nh-tms"/>
@@ -467,7 +471,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Sab-t7-qq3">
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
-                                <color key="backgroundColor" systemColor="systemGray3Color"/>
+                                <color key="backgroundColor" name="Background"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YDQ-rX-QNK">
                                     <size key="itemSize" width="201" height="343"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -547,7 +551,7 @@
                                                         </view>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egF-8n-7Dd" customClass="FavouriteButton" customModule="BookStore_JoaoGomes" customModuleProvider="target">
                                                             <rect key="frame" x="146.33333333333334" y="4" width="50.666666666666657" height="50.666666666666664"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="backgroundColor" name="StatusBars"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="egF-8n-7Dd" secondAttribute="height" multiplier="1:1" id="QLC-Py-WUH"/>
                                                             </constraints>
@@ -601,7 +605,7 @@
                                     <constraint firstAttribute="height" constant="40" id="5e6-OF-XRH"/>
                                     <constraint firstAttribute="width" secondItem="5F6-DI-GFV" secondAttribute="height" multiplier="1:1" id="6tQ-hb-WoW"/>
                                 </constraints>
-                                <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="color" name="MainText"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D8H-Yb-Fzr" customClass="LocalizedLabel" customModule="BookStore_JoaoGomes" customModuleProvider="target">
                                 <rect key="frame" x="16" y="426" width="361" height="0.0"/>
@@ -614,7 +618,7 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Tks-di-gxP"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="StatusBars"/>
                         <constraints>
                             <constraint firstItem="Tks-di-gxP" firstAttribute="bottom" secondItem="Sab-t7-qq3" secondAttribute="bottom" id="HDD-dg-z4R"/>
                             <constraint firstItem="Tks-di-gxP" firstAttribute="trailing" secondItem="D8H-Yb-Fzr" secondAttribute="trailing" constant="16" id="HYp-IU-rFV"/>
@@ -642,20 +646,23 @@
         <image name="cart" catalog="system" width="128" height="102"/>
         <image name="heart" catalog="system" width="128" height="107"/>
         <image name="plus.magnifyingglass" catalog="system" width="128" height="117"/>
+        <namedColor name="Background">
+            <color red="0.81527819890842945" green="0.82498389175257736" blue="0.82498389175257736" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="MainText">
+            <color red="0.1734346573681019" green="0.17549935567010311" blue="0.17549935567010311" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="PurchaseButton">
+            <color red="0.20000000000000001" green="1" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="StatusBars">
+            <color red="0.94167298362644036" green="0.95288337628865982" blue="0.95288337628865982" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray3Color">
-            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
