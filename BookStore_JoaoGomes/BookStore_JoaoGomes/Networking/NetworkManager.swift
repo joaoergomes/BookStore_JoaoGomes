@@ -9,8 +9,14 @@ import Foundation
 
 class NetworkManager
 {
+    //MARK: - Variables
+    static let shared = NetworkManager()
     private let baseUrl = URL(string:"https://www.googleapis.com/books/v1/volumes?q=ios")!
     
+    //MARK: - Inits
+    private init(){}
+    
+    //MARK: - Functions
     func loadBookItems(index: Int, numResults: Int, completion: @escaping (Result<BookList,Error>) -> Void)
     {
         var components = URLComponents(url: baseUrl, resolvingAgainstBaseURL: false)!

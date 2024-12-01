@@ -55,10 +55,8 @@ class ListViewController: UIViewController
     
     private func performLoad()
     {
-        let manager = NetworkManager()
-
         self.activityIndicatorView.startAnimating()
-        manager.loadBookItems(index: books.count, numResults: 20) { [weak self] result in
+        NetworkManager.shared.loadBookItems(index: books.count, numResults: 20) { [weak self] result in
             DispatchQueue.main.async
             {
                 switch result
